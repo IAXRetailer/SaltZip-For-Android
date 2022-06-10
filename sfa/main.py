@@ -13,6 +13,11 @@ from library.Core.Zip import zip as Izip
 from library.Core.Bitlayer import BitString
 from os.path import dirname,exists
 from kivy.core.text import LabelBase
+from android.permissions import request_permissions, Permission
+request_permissions([
+    Permission.WRITE_EXTERNAL_STORAGE,
+    Permission.READ_EXTERNAL_STORAGE
+])
 LabelBase.register(name='Han_Font',fn_regular='./fonts/b.ttf')
 
 Builder.load_file("main.kv")
