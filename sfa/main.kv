@@ -1,0 +1,21 @@
+#:kivy 2.1.0
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+<WarningPopup@Popup>:
+    title: 'Warning'
+    size_hint: None, None
+    size: 400, 200
+
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: 'Do you really want to selete this element?'
+        BoxLayout:
+            size_hint_y: 0.3
+            Button:
+                text: "Cancel"
+                on_release: root.dismiss()
+            Button:
+                text: "Accept"
+                on_release:
+                    root.parent_inst.selete()
+                    root.dismiss()
