@@ -1,14 +1,18 @@
-import zipfile
+import zipfile,rarfile
 from zipfile import ZipFile
 def unzip(zip_file_path,pwd,target_path):
     zip_file = support_gbk(zipfile.ZipFile(zip_file_path))
     zip_list = zip_file.namelist()
 
     for f in zip_list:
-        zip_file.extract(f,target_path,pwd.encode("utf-8"))
+        if pwd != None:
+            zip_file.extract(f,target_path,pwd.encode("utf-8"))
+        else:
+            zip_file.extract(f,target_path)
     zip_file.close()
-
-
+def unrarfile(zip_file_path,target_path):
+    rf = rarfile.RarFile(zip_file_path)
+    rf.extractall(target_path)
 
 def support_gbk(zip_file: ZipFile):
     name_to_info = zip_file.NameToInfo

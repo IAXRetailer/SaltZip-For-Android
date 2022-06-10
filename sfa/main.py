@@ -16,6 +16,12 @@ from kivy.core.text import LabelBase
 LabelBase.register(name='Han_Font',fn_regular='./fonts/b.ttf')
 
 Builder.load_file("main.kv")
+
+
+class FinishPopupBox(BoxLayout):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+
 class WarningPopup(Popup):
     def __init__(self, parent_inst, *args,  **kwargs):
         super(WarningPopup, self).__init__(*args, **kwargs)
@@ -35,6 +41,18 @@ class ChoseFile(BoxLayout):
         try:
             hkpath=self.fichoo.selection[0]
         except:
+            return
+        if ".zip" in hkpath:
+            try:
+                Izip.unzip(hkpath,None,dirname(hkpath))
+            except:
+                pass
+            return
+        if ".rar" in hkpath:
+            try:
+                Izip.unrarfile(hkpath,dirname(hkpath))
+            except:
+                pass
             return
         if ".hk" in hkpath:
             con=open(hkpath,"r").read()

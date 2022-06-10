@@ -8,11 +8,11 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,ttf
 
 version = 0.1
-requirements = python3,kivy,pyDes
+requirements = python3,kivy,pyDes,rarfile
 icon.filename=icon.png
 
 orientation = portrait
-fullscreen = 0
+fullscreen = 1
 android.arch = armeabi-v7a
 
 [buildozer]
