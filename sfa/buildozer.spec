@@ -12,8 +12,10 @@ requirements = python3,kivy,pyDes,rarfile
 icon.filename=icon.png
 
 orientation = portrait
-fullscreen = 1
+fullscreen = 0
 android.arch = armeabi-v7a
+
+android.permissions = READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 
 [buildozer]
 log_level = 2
