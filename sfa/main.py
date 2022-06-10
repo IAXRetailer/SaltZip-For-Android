@@ -12,7 +12,6 @@ from library.Core.Hash import des
 from library.Core.Zip import zip as Izip
 from library.Core.Bitlayer import BitString
 from os.path import dirname,exists
-from kivy.config import Config
 from kivy.core.text import LabelBase
 LabelBase.register(name='Han_Font',fn_regular='./fonts/b.ttf')
 
@@ -27,13 +26,16 @@ class ChoseFile(BoxLayout):
         self.orientation = "vertical"
         self.fichoo = FileChooserListView(font_name="Han_Font")
         self.popup = WarningPopup(self)
-        btn_delete = Button(text="Select", on_release=self.popup.open, size_hint_y=0.1)
+        btn_delete = Button(text="选择文件", on_release=self.popup.open, size_hint_y=0.1,font_name="Han_Font")
 
         self.add_widget(self.fichoo)
         self.add_widget(btn_delete)
 
     def selete(self, *args):
-        hkpath=self.fichoo.selection[0]
+        try:
+            hkpath=self.fichoo.selection[0]
+        except:
+            return
         if ".hk" in hkpath:
             con=open(hkpath,"r").read()
             filepath=hkpath.replace(".hk",".sip")
