@@ -8,8 +8,8 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,ttf
 
 version = 0.1
-requirements = python3,kivy,pyDes,zipfile,base64,struct
-icon.filename=./icon.png
+requirements = python3,kivy,pyDes
+icon.filename=icon.png
 
 orientation = portrait
 fullscreen = 0
