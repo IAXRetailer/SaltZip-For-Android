@@ -8,7 +8,7 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 
 version = 0.1
-requirements = python3,kivy
+requirements = python3==3.7,kivy
 icon.filename=./icon.png
 
 orientation = portrait
