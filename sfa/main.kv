@@ -3,20 +3,20 @@
     title: 'Warning'
     size_hint: None, None
     size: 400, 200
-    MDBoxLayout:
+    BoxLayout:
         orientation: "vertical"
-        MDLabel:
+        Label:
             size_hint: None, None
             font_name:"Han_Font"
             text: '您确定选择这个文件吗'
             color:[1,1,1,1]
-        MDBoxLayout:
+        BoxLayout:
             size_hint_y: 0.3
-            MDFlatButton:
+            Button:
                 font_name:"Han_Font"
                 text: "取消"
                 on_release: root.dismiss()
-            MDFlatButton:
+            Button:
                 font_name:"Han_Font"
                 text: "确定"
                 on_release:
@@ -26,16 +26,16 @@
     title: 'Start'
     size_hint: None, None
     size: 400, 200
-    MDBoxLayout:
+    BoxLayout:
         orientation: "vertical"
-        MDLabel:
+        Label:
             size_hint: None, None
             font_name:"Han_Font"
             text: '您确定开始吗'
             color:[1,1,1,1]
-        MDBoxLayout:
+        BoxLayout:
             size_hint_y: 0.3
-            MDFlatButton:
+            Button:
                 font_name:"Han_Font"
                 text: "确定"
                 on_release:
@@ -45,14 +45,14 @@
     title: 'Tips'
     size_hint: None, None
     size: 400, 200
-    MDBoxLayout:
+    BoxLayout:
         orientation: "vertical"
-        MDLabel:
+        Label:
             font_name:"Han_Font"
             text: '解压成功'
-        MDBoxLayout:
+        BoxLayout:
             size_hint_y: 0.3
-            MDFlatButton:
+            Button:
                 font_name:"Han_Font"
                 text: "确定"
                 on_release: root.dismiss()
@@ -60,15 +60,15 @@
     title: 'ERROR'
     size_hint: None, None
     size: 400, 200
-    MDBoxLayout:
+    BoxLayout:
         orientation: "vertical"
-        MDLabel:
+        Label:
             size: self.texture_size
             font_name:"Han_Font"
             text: '解压失败'
         BoxLayout:
             size_hint_y: 0.3
-            MDFlatButton:
+            Button:
                 font_name:"Han_Font"
                 text: "确定"
                 on_release: root.dismiss()
@@ -76,15 +76,15 @@
     title: 'ERROR'
     size_hint: None, None
     size: 400, 200
-    MDBoxLayout:
+    BoxLayout:
         orientation: "vertical"
-        MDLabel:
+        Label:
             size: self.texture_size
             font_name:"Han_Font"
             text: '尚未选择文件'
-        MDBoxLayout:
+        BoxLayout:
             size_hint_y: 0.3
-            MDFlatButton:
+            Button:
                 font_name:"Han_Font"
                 text: "确定"
                 on_release: root.dismiss()
