@@ -1,9 +1,6 @@
 import kivy
 kivy.require('2.1.0')
-from kivy.core.window import Window
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.button import Button
-from kivy.uix.label import Label
+
 from kivy.app import App
 from kivy.uix.filechooser import FileChooserListView
 from kivy.uix.boxlayout import BoxLayout
@@ -13,23 +10,12 @@ from kivy.lang.builder import Builder
 from library.Core.Hash import des
 from library.Core.Zip import zip as Izip
 from library.Core.Bitlayer import BitString
-from os.path import dirname,exists,join
+from os.path import dirname,exists
 from kivy.core.text import LabelBase
 from kivy.utils import platform
-from kivy.core.window import Window
-from shutil import rmtree
 if platform == "android":
-    from androidstorage4kivy import SharedStorage, Chooser
     from android.permissions import request_permissions, Permission
-    from android import api_version,autoclass,mActivity
-    Environment = autoclass('android.os.Environment')
-    if api_version < 29:
-        request_permissions([
-            Permission.WRITE_EXTERNAL_STORAGE,
-            Permission.READ_EXTERNAL_STORAGE
-        ])
-    else:
-        request_permissions([Permission.WRITE_EXTERNAL_STORAGE,Permission.READ_EXTERNAL_STORAGE])
+    request_permissions([Permission.WRITE_EXTERNAL_STORAGE,Permission.READ_EXTERNAL_STORAGE])
 LabelBase.register(name='Han_Font',fn_regular='./fonts/b.ttf')
 
 Builder.load_file("main.kv")
@@ -50,51 +36,6 @@ class WarningPopup(Popup):
     def __init__(self, parent_inst, *args,  **kwargs):
         super(WarningPopup, self).__init__(*args, **kwargs)
         self.parent_inst = parent_inst
-############################################
-class HChoseFile(BoxLayout):
-    def build(self):
-        Window.bind(on_keyboard = self.quit_app)
-        # create chooser listener
-        self.chooser = Chooser(self.chooser_callback)
-  
-        temp = SharedStorage().get_cache_dir()
-        if temp and exists(temp):
-            rmtree(temp)
-
-        # layout
-        self.button = Button(text = 'Choose an file',
-                             on_press = self.chooser_start,
-                             size_hint=(1, .15))
-        self.layout = BoxLayout(orientation='vertical')
-        self.layout.add_widget(self.label)
-        self.layout.add_widget(self.button)
-        return self.layout
-    def quit_app(self,window,key,*args):
-        if key == 27:
-            mActivity.finishAndRemoveTask() 
-            return True   
-        else:
-            return False    
-    def start_app(self):
-        ss = SharedStorage()
-        app_title = str(ss.get_app_title())
-        self.display()
-    def chooser_start(self,bt):
-        self.chooser.choose_content("*/*")
-
-    def chooser_callback(self,uri_list):
-        try:
-            ss = SharedStorage()
-            for uri in uri_list:
-                # copy to private
-                path = ss.copy_from_shared(uri)
-                if path:
-                    # then to app shared
-                    shared = ss.copy_to_shared(path)
-        except:
-            pass
-    # Label text
-############################################
 class ChoseFile(BoxLayout):
     def __init__(self, *args, **kwargs):
         super(ChoseFile, self).__init__(*args, **kwargs)
@@ -161,13 +102,6 @@ class ChoseFile(BoxLayout):
 class SaltZip(App):
     def build(self):
         return ChoseFile()
-class HSaltZip(App):
-    def build(self):
-        return HChoseFile()
 
 if __name__ == '__main__':
-    if platform == "android":
-        if api_version < 29:
-            HSaltZip().run()
-    else:
-        SaltZip().run()
+    SaltZip().run()
