@@ -59,29 +59,34 @@ class ChoseFile(MDBoxLayout):
             toast(path)
             self.selete(path)
         except:
-            return
+            ChoseFile()
         #self.add_widget(self.fichoo)
         #self.add_widget(btn_delete)
 
     def selete(self,path, *args):
         try:
             hkpath=path
+            ChoseFile()
         except:
             FailPopupBox().open()
-            pass
+            ChoseFile()
         if ".zip" in hkpath:
             try:
                 Izip.unzip(hkpath,None,dirname(hkpath))
                 FinishPopupBox().open()
+                ChoseFile()
             except:
                 FailPopupBox().open()
+                ChoseFile()
             return
         if ".rar" in hkpath:
             try:
                 Izip.unrarfile(hkpath,dirname(hkpath))
                 FinishPopupBox().open()
+                ChoseFile()
             except:
                 FailPopupBox().open()
+                ChoseFile()
             return
         if ".hk" in hkpath:
             try:
@@ -97,8 +102,10 @@ class ChoseFile(MDBoxLayout):
                 password=des.decodeStringhash(chuck1,chuck2[0],chuck2[1])
                 Izip.unzip(filepath,password,dirname(filepath))
                 FinishPopupBox().open()
+                ChoseFile()
             except:
                 FailPopupBox().open()
+                ChoseFile()
         elif ".h2k" in hkpath:
             try:
                 con=open(hkpath,"rb").read()
@@ -109,10 +116,13 @@ class ChoseFile(MDBoxLayout):
                 unfilepath=hkpath.replace(lenstr+".h2k","sip")
                 Izip.unzip(unfilepath,password,dictory)
                 FinishPopupBox().open()
+                ChoseFile()
             except:
                 FailPopupBox().open()
+                ChoseFile()
         else:
             NotChosePopupBox().open()
+            ChoseFile()
 
 class SaltZip(MDApp):
     def build(self):
