@@ -66,7 +66,6 @@ class ChoseFile(MDBoxLayout):
     def selete(self,path, *args):
         try:
             hkpath=path
-            ChoseFile()
         except:
             FailPopupBox().open()
             ChoseFile()
