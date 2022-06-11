@@ -22,3 +22,55 @@
                 on_release:
                     root.parent_inst.selete()
                     root.dismiss()
+
+<FinishPopupBox@Popup>:  ##自定义弹窗，提出公共属性
+    title: 'Tips'
+    size_hint: None, None
+    size: 400, 200
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            size_hint: None, None
+            size: self.texture_size
+            font_name:"Han_Font"
+            text: '解压成功'
+        BoxLayout:
+            size_hint_y: 0.3
+            Button:
+                font_name:"Han_Font"
+                text: "确定"
+                on_release: root.dismiss()
+<FailPopupBox@Popup>:  ##自定义弹窗，提出公共属性
+    title: 'ERROR'
+    size_hint: None, None
+    size: 400, 200
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            size_hint: None, None
+            size: self.texture_size
+            font_name:"Han_Font"
+            text: '解压失败'
+        BoxLayout:
+            size_hint_y: 0.3
+            Button:
+                font_name:"Han_Font"
+                text: "确定"
+                on_release: root.dismiss()
+<NotChosePopupBox@Popup>:  ##自定义弹窗，提出公共属性
+    title: 'ERROR'
+    size_hint: None, None
+    size: 400, 200
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            size_hint: None, None
+            size: self.texture_size
+            font_name:"Han_Font"
+            text: '尚未选择文件'
+        BoxLayout:
+            size_hint_y: 0.3
+            Button:
+                font_name:"Han_Font"
+                text: "确定"
+                on_release: root.dismiss()
