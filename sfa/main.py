@@ -1,8 +1,4 @@
-from shutil import rmtree
-from textwrap import fill
-from threading import main_thread
 import kivy
-
 kivy.require('2.1.0')
 from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
@@ -20,9 +16,10 @@ from library.Core.Bitlayer import BitString
 from os.path import dirname,exists,join
 from kivy.core.text import LabelBase
 from kivy.utils import platform
-from androidstorage4kivy import SharedStorage, Chooser
 from kivy.core.window import Window
+from shutil import rmtree
 if platform == "android":
+    from androidstorage4kivy import SharedStorage, Chooser
     from android.permissions import request_permissions, Permission
     from android import api_version,autoclass,mActivity
     Environment = autoclass('android.os.Environment')
