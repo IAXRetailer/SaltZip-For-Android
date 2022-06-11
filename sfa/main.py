@@ -1,10 +1,11 @@
+from turtle import onrelease
 import kivy
 kivy.require('2.1.0')
-
-from kivy.app import App
 from kivy.uix.filechooser import FileChooserListView
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.button import Button
+from kivymd.uix.filemanager import MDFileManager
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.button import MDLabel
+from kivymd.uix.button import MDFlatButton
 from kivy.uix.popup import Popup
 from kivy.lang.builder import Builder
 from library.Core.Hash import des
@@ -12,10 +13,16 @@ from library.Core.Zip import zip as Izip
 from library.Core.Bitlayer import BitString
 from os.path import dirname,exists
 from kivy.core.text import LabelBase
+#from kivy.core.text import 
 from kivy.utils import platform
+from kivymd.app import MDApp
+from kivymd.toast import toast
 if platform == "android":
     from android.permissions import request_permissions, Permission
-    request_permissions([Permission.WRITE_EXTERNAL_STORAGE,Permission.READ_EXTERNAL_STORAGE])
+    request_permissions([
+        Permission.WRITE_EXTERNAL_STORAGE,
+        Permission.READ_EXTERNAL_STORAGE
+        ])
 LabelBase.register(name='Han_Font',fn_regular='./fonts/b.ttf')
 
 Builder.load_file("main.kv")
@@ -31,28 +38,37 @@ class FailPopupBox(Popup):
 class FinishPopupBox(Popup):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
-
+class StartPopup(Popup):
+    def __init__(self, *args,  **kwargs):
+        super(StartPopup, self).__init__(*args, **kwargs)
+    def selete(self, *args):
+        ChoseFile()
 class WarningPopup(Popup):
     def __init__(self, parent_inst, *args,  **kwargs):
         super(WarningPopup, self).__init__(*args, **kwargs)
         self.parent_inst = parent_inst
-class ChoseFile(BoxLayout):
+class ChoseFile(MDBoxLayout):
     def __init__(self, *args, **kwargs):
         super(ChoseFile, self).__init__(*args, **kwargs)
-        self.orientation = "vertical"
-        self.fichoo = FileChooserListView(font_name="Han_Font")
-        self.popup = WarningPopup(self)
-        btn_delete = Button(text="选择文件", on_release=self.popup.open, size_hint_y=0.1,font_name="Han_Font")
-
-        self.add_widget(self.fichoo)
-        self.add_widget(btn_delete)
-
-    def selete(self, *args):
+        from plyer import filechooser
+        #self.fichoo = FileChooserListView(font_name="Han_Font")
+        #self.popup = WarningPopup(self)
+        #btn_delete = MDFlatButton(text="选择文件", on_release=self.popup.open, size_hint_y=0.1,font_name="Han_Font")
         try:
-            hkpath=self.fichoo.selection[0]
+            path = filechooser.open_file()[0]
+            toast(path)
+            self.selete(path)
+        except:
+            return
+        #self.add_widget(self.fichoo)
+        #self.add_widget(btn_delete)
+
+    def selete(self,path, *args):
+        try:
+            hkpath=path
         except:
             FailPopupBox().open()
-            return
+            pass
         if ".zip" in hkpath:
             try:
                 Izip.unzip(hkpath,None,dirname(hkpath))
@@ -97,10 +113,10 @@ class ChoseFile(BoxLayout):
                 FailPopupBox().open()
         else:
             NotChosePopupBox().open()
-            pass
 
-class SaltZip(App):
+class SaltZip(MDApp):
     def build(self):
+        self.theme_cls.primary_palette = "Blue"
         return ChoseFile()
 
 if __name__ == '__main__':
