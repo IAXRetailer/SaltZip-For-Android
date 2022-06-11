@@ -8,7 +8,7 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,ttf
 
 version = 0.1
-requirements = python3,kivy,pyDes,rarfile,plyer
+requirements = python3,kivy,pyDes,rarfile,kivyMD,Pillow
 icon.filename=icon.png
 
 orientation = portrait
