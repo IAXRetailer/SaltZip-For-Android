@@ -8,7 +8,7 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,ttf
 
 version = 0.1
-requirements = python3,kivy,pyDes,rarfile
+requirements = python3,kivy,pyDes,rarfile,androidstorage4kivy
 icon.filename=icon.png
 
 orientation = portrait
